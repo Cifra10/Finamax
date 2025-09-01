@@ -349,7 +349,7 @@
             valor: 0
         };
 
-        const SCRIPT_URL = ''; // <-- COLOQUE A URL DO SEU SCRIPT DO GOOGLE SHEETS AQUI
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwcN8tLXp5d-IsINdRFBPBSLALcRCZJoorLNYZWxszYOERnf448rbbL9e4z2ELhNvN7/exec'; // <-- COLOQUE A URL DO SEU SCRIPT DO GOOGLE SHEETS AQUI
 
         function testaCPF(strCPF) {
             let Soma;
@@ -573,7 +573,7 @@
             
             $('#approvedValue').text(formattedValue);
             
-            const whatsappNumber = "5511999999999"; // Substitua pelo seu número
+            const whatsappNumber = "5511967210649‬"; // Substitua pelo seu número
             const redirectUrl = `obrigado.html?nome=${encodeURIComponent(userData.nome)}&valor=${encodeURIComponent(formattedValue)}&numero=${whatsappNumber}`;
             $('#whatsappBtn').attr('href', redirectUrl);
         }
