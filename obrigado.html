@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obrigado - Finamax</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#820AD1',
+                        secondary: '#1A202C',
+                        'light-bg': '#F7FAFC',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(26, 32, 44, 0.2);
+            border-radius: 50%;
+            border-top-color: #1A202C;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-light-bg flex items-center justify-center min-h-screen font-sans">
+    <div class="text-center p-8 bg-white rounded-xl shadow-md max-w-md mx-auto">
+        <div class="flex items-center justify-center mb-4">
+            <div class="bg-primary text-white font-bold rounded-lg p-2 mr-3">
+                <span class="text-xl">F</span>
+            </div>
+            <h1 class="text-xl font-bold text-secondary">Finamax</h1>
+        </div>
+        <h2 class="text-2xl font-bold text-secondary mb-4">Obrigado pelo seu interesse!</h2>
+        <p class="text-gray-600 mb-6">Estamos a redirecioná-lo para o WhatsApp para que possa falar com um dos nossos consultores.</p>
+        <div class="loading-spinner mx-auto mb-8"></div>
+        <p class="text-sm text-gray-500">Se não for redirecionado automaticamente, <a id="whatsappRedirectLink" href="#" class="text-primary underline">clique aqui</a>.</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const nome = urlParams.get('nome');
+            const valor = urlParams.get('valor');
+            const numero = urlParams.get('numero');
+
+            if (nome && valor && numero) {
+                const whatsappMessage = encodeURIComponent(`Olá, sou ${nome} e o valor pré-aprovado no site foi de ${valor}. Desejo dar continuidade no contrato.`);
+                const whatsappUrl = `https://wa.me/${numero}?text=${whatsappMessage}`;
+
+                document.getElementById('whatsappRedirectLink').href = whatsappUrl;
+
+                setTimeout(function() {
+                    window.location.href = whatsappUrl;
+                }, 3000); // Atraso de 3 segundos
+            } else {
+                console.error("Dados necessários para o redirecionamento do WhatsApp não foram encontrados.");
+                const content = document.querySelector('.text-center');
+                content.innerHTML = '<h2 class="text-2xl font-bold text-red-600 mb-4">Ocorreu um Erro</h2><p class="text-gray-600">Não foi possível obter os dados para o redirecionamento. Por favor, tente novamente.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
